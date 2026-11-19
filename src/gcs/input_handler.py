@@ -29,14 +29,23 @@ class InputPoller(threading.Thread):
         self.event_bus = event_bus
         self._stop_event = threading.Event()
         self._joysticks: dict[int, pygame.joystick.JoystickType] = {}
+        self._initialized = False
+
+    def init_pygame_on_main_thread(self) -> None:
+        """Must run on MainThread on macOS so Cocoa/AppKit does not abort."""
+        if self._initialized:
+            return
+        pygame.init()
+        pygame.joystick.init()
+        self._scan_existing_joysticks()
+        self._initialized = True
 
     def stop(self) -> None:
         self._stop_event.set()
 
     def run(self) -> None:
-        pygame.init()
-        pygame.joystick.init()
-        self._scan_existing_joysticks()
+        if not self._initialized:
+            self.init_pygame_on_main_thread()
 
         try:
             while not self._stop_event.is_set():
@@ -141,7 +150,7 @@ class InputPoller(threading.Thread):
                         payload={
                             "device_id": ev.instance_id,
                             "hat": ev.hat,
-                            "value": ev.value,  # (x, y) tuple
+                            "value": ev.value,
                         },
                     )
                 )
@@ -160,4 +169,3 @@ class InputPoller(threading.Thread):
                         },
                     )
                 )
-                

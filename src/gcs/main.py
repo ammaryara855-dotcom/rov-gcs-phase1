@@ -17,7 +17,7 @@ def main() -> None:
 
     def on_any_event(event: Event) -> None:
         if event.name == "input.axis" and event.payload.get("value") == 0.0:
-            return  # Keep console clean when sticks are centered
+            return
         logger.info("EVENT %-28s | %s", event.name, event.payload)
 
     def on_key_event(event: Event) -> None:
@@ -28,6 +28,7 @@ def main() -> None:
     event_bus.subscribe("input.key", on_key_event)
 
     poller = InputPoller(config=config, event_bus=event_bus)
+    poller.init_pygame_on_main_thread()
     poller.start()
 
     try:
@@ -45,4 +46,3 @@ def main() -> None:
 
 if __name__ == "__main__":
     main()
-    
