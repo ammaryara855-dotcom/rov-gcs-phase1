@@ -1,0 +1,9 @@
+{
+  "poll_rate_hz": 50,
+  "deadzone": 0.12,
+  "active_profile": "default",
+  "device_profiles": {
+    "Controller (XBOX For Windows)": "xbox_pad",
+    "Xbox Wireless Controller": "xbox_pad"
+  }
+}

@@ -1,0 +1,19 @@
+{
+  "name": "default",
+  "axes": {
+    "0": "surge",
+    "1": "sway",
+    "3": "yaw"
+  },
+  "buttons": {
+    "0": "arm_toggle",
+    "1": "mode_switch"
+  },
+  "keys": {
+    "w": "surge_pos",
+    "s": "surge_neg",
+    "a": "sway_neg",
+    "d": "sway_pos",
+    "r": "reload_config"
+  }
+}

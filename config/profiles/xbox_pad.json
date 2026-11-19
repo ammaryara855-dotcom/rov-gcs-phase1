@@ -1,0 +1,19 @@
+{
+  "name": "xbox_pad",
+  "axes": {
+    "0": "sway",
+    "1": "surge",
+    "2": "heave",
+    "3": "yaw"
+  },
+  "buttons": {
+    "0": "gripper_open",
+    "1": "gripper_close",
+    "7": "arm_toggle"
+  },
+  "keys": {
+    "w": "surge_pos",
+    "s": "surge_neg",
+    "r": "reload_config"
+  }
+}
